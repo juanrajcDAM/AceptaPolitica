@@ -19,6 +19,9 @@ public class AceptaPolitica extends AppCompatActivity {
 
         Button btAct = (Button)findViewById(R.id. button);
 
+        TextView txtMensaje = (TextView)findViewById(R.id.textView);
+        txtMensaje.setText("Resultado: " );
+
         btAct.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +58,7 @@ public class AceptaPolitica extends AppCompatActivity {
         bundle.putString( "NOMBRE", nombre);
         bundle.putString( "EDAD", edad);
         intent.putExtras(bundle);
-        startActivity(intent);
+        startActivityForResult(intent, CODIGO);
     }
 
 }

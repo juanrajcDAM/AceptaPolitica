@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 public class Verifica extends AppCompatActivity {
 
-    private final static int CODIGO = 0;
-
     private boolean flag;
     private String edad;
 
@@ -60,7 +58,8 @@ public class Verifica extends AppCompatActivity {
             bundle.putString( "OPCION", "Rechazada");
 
         intent.putExtras(bundle);
-        startActivityForResult(intent, CODIGO);
+        setResult(RESULT_OK, intent);
+        finish();
 
     }
 
