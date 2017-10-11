@@ -16,6 +16,8 @@ public class Verifica extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verifica);
 
+        /*Al crearse la activity Verifica, mostrará el nombre que le hemos pasado desde
+        la activity AceptaPolitica*/
         TextView txtMensaje =(TextView)findViewById(R.id.texto);
         Bundle bundle = getIntent().getExtras();
         txtMensaje.setText( "Hola "+ bundle.getString("NOMBRE")+
@@ -23,6 +25,8 @@ public class Verifica extends AppCompatActivity {
 
         edad=bundle.getString("EDAD");
 
+        /*Asignamos el botón de aceptar a un tipo Button, con el que posteriormente
+        le crearemos un oyente.*/
         Button btAct2 = (Button)findViewById(R.id. button2);
         btAct2.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -32,6 +36,8 @@ public class Verifica extends AppCompatActivity {
             }
         });
 
+        /*Asignamos el botón de rechazar a un tipo Button, con el que posteriormente
+        le crearemos un oyente.*/
         Button btAct3 = (Button)findViewById(R.id. button3);
         btAct3.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -42,13 +48,20 @@ public class Verifica extends AppCompatActivity {
         });
     }
 
+    /**
+     * El método devolverá los datos de la opción seleccionada en la activity Verifica
+     * a la activity AceptaPolítica. Se le pasará por parámetro la edad en tipo String.
+     */
     public void volverMain(String edad){
 
         Intent intent= new Intent (this, AceptaPolitica. class);
         Bundle bundle = new Bundle();
 
+        //Comprobamos con una bandera de tipo booleano la opción seleccionada (aceptada o rechazada).
         if(flag) {
 
+            /*Comprobamos también la edad introducida previamente en la activity AceptaPolitica.
+            Mostraremos un mensaje diferente dependiendo de si es mayor o menor de edad.*/
             if (Integer.parseInt(edad) < 18)
                 bundle.putString("OPCION", "Aceptada con restricciones.");
             else

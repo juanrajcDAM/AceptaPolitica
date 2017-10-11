@@ -17,20 +17,31 @@ public class AceptaPolitica extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*Asignamos el botón de verificar a un tipo Button, con el que posteriormente
+        le crearemos un oyente.*/
         Button btAct = (Button)findViewById(R.id. button);
-
-        TextView txtMensaje = (TextView)findViewById(R.id.textView);
-        txtMensaje.setText("Resultado: " );
 
         btAct.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirVerifica();
+
+                //Antes de enviar los datos, comprobamos que la edad introducida es válida.
+                if(compruebaEdad())
+                    abrirVerifica();
+                else {
+                    //Si no es válida, se mostrará un mensaje en el campo textView.
+                    TextView txtMensaje = (TextView) findViewById(R.id.textView);
+                    txtMensaje.setText("EDAD NO VÁLIDA");
+                }
+
             }
         });
 
     }
 
+    /**
+     * Según el resultado que devuelva la activity Verifica, mostrará un mensaje acorde.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -45,6 +56,9 @@ public class AceptaPolitica extends AppCompatActivity {
 
     }
 
+    /**
+     * Envía los datos requeridos a la activity Verifica.
+     */
     public void abrirVerifica(){
 
         EditText etNombre = (EditText)findViewById(R.id. editText);
@@ -59,6 +73,28 @@ public class AceptaPolitica extends AppCompatActivity {
         bundle.putString( "EDAD", edad);
         intent.putExtras(bundle);
         startActivityForResult(intent, CODIGO);
+    }
+
+    /**
+     * Comprueba la validez del valor introducido en el campo Edad mediante la excepción
+     * NumberFormatException. Devuelve un booleano.
+     */
+    private boolean compruebaEdad(){
+
+        boolean valido=true;
+
+        try {
+
+            EditText comEdad = (EditText) findViewById(R.id.editText2);
+            String edadCom = comEdad.getText().toString();
+            int edadEntero = Integer.parseInt(edadCom);
+
+        }catch(NumberFormatException nfe){
+            valido=false;
+        }
+
+        return valido;
+
     }
 
 }
